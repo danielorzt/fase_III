@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biodiversidad en Cundinamarca y Boyacá</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <header class="header bg-primary text-white text-center py-3">
+        <div class="container">
+            <h1>Biodiversidad en Cundinamarca y Boyacá</h1>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#inicio">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#informacion">Información</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#mapa">Mapa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#articulos">Artículos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#especies">Especies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#contacto">Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="inicio" class="container text-center my-5">
+            <img class="hero-imagen-desarrollador rounded-circle" src="{{ url_for('static', filename='images/colombia.png') }}" alt="Bandera de Colombia" />
+            <h2>Bienvenidos</h2>
+            <p>Explora la biodiversidad en las regiones de Cundinamarca y Boyacá.</p>
+            <button class="btn btn-primary" onclick="document.getElementById('informacion').scrollIntoView()">Descubre más</button>
+        </section>
+        <section id="informacion" class="container my-5">
+            <h2>Sobre nosotros</h2>
+            <p>Somos un equipo dedicado a la conservación y estudio de la biodiversidad en Colombia. Nuestra misión es proteger y promover el conocimiento sobre las riquezas naturales de nuestro país.</p>
+        </section>
+        <section class="container-fluid p-0">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ url_for('static', filename='images/slide1.jpg') }}" class="d-block w-100" alt="Laguna de Sochagota" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Laguna de Sochagota</h5>
+                            <p>Un hito de biodiversidad por sus aguas cristalinas y la variedad de flora y fauna que alberga.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='images/slide2.jpg') }}" class="d-block w-100" alt="Minas de Sal de Zipaquirá" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Minas de Sal de Zipaquirá</h5>
+                            <p>Un monumento histórico y natural que refleja la riqueza geológica y la biodiversidad subterránea de la región.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='images/slide3.jpg') }}" class="d-block w-100" alt="Nevado del Cocuy" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Nevado del Cocuy</h5>
+                            <p>Una majestuosa montaña que ofrece paisajes glaciares y alberga especies únicas de alta montaña.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='images/slide4.jpg') }}" class="d-block w-100" alt="Cielo estrellado de Cundinamarca" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Cielo estrellado de Cundinamarca</h5>
+                            <p>Un espectáculo natural que muestra la belleza del firmamento en una región con baja contaminación lumínica.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+        <section class="container my-5">
+            <h2 class="text-center">Proyectos recientes</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/proyecto1.jpg') }}" class="card-img-top" alt="Proyecto 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">Proyecto 1</h5>
+                            <p class="card-text">
+                                Observación de colibríes en su hábitat natural. Este proyecto se enfoca en el estudio y conservación de las diferentes especies de colibríes que habitan la región, analizando sus patrones de comportamiento y la flora que les proporciona alimento.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/proyecto2.jpg') }}" class="card-img-top" alt="Proyecto 2" />
+                        <div class="card-body">
+                            <h5 class="card-title">Proyecto 2</h5>
+                            <p class="card-text">
+                                Conservación de la fauna local en áreas rurales. Este proyecto aborda la protección de especies autóctonas en zonas agrícolas y ganaderas, promoviendo prácticas sostenibles que permitan la convivencia armoniosa entre la fauna y las actividades humanas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/proyecto3.jpg') }}" class="card-img-top" alt="Proyecto 3" />
+                        <div class="card-body">
+                            <h5 class="card-title">Proyecto 3</h5>
+                            <p class="card-text">
+                                Flora nativa y su importancia ecológica. Este proyecto investiga la diversidad de plantas nativas en Cundinamarca y Boyacá, resaltando su papel crucial en los ecosistemas locales y las estrategias necesarias para su conservación y reforestación.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="testimonios" class="container my-5">
+            <h2>Testimonios</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-testimonio">
+                        <div class="card-body">
+                            <p class="card-text">
+                                "El trabajo realizado por el equipo fue excelente. Gracias a ellos, hemos podido avanzar en la conservación de nuestra flora y fauna."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <footer class="blockquote-footer">Juan Pérez</footer>
+                                <div class="stars ms-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-testimonio">
+                        <div class="card-body">
+                            <p class="card-text">
+                                "Un equipo profesional y comprometido. Recomiendo sus servicios a todas las organizaciones interesadas en la biodiversidad."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <footer class="blockquote-footer">Ana Gómez</footer>
+                                <div class="stars ms-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-testimonio">
+                        <div class="card-body">
+                            <p class="card-text">
+                                "La dedicación y conocimiento del equipo es impresionante. Han hecho un gran trabajo en nuestros proyectos de investigación."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <footer class="blockquote-footer">Carlos Ruiz</footer>
+                                <div class="stars ms-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="articulos" class="container my-5">
+            <h2>Artículos sobre biodiversidad en Colombia</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/articulo1.jpg') }}" class="card-img-top" alt="Artículo 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Colombia se postula para ser sede de la cumbre de biodiversidad más importante del mundo
+                            </h5>
+                            <p class="card-text">
+                                Artículo sobre la postulación de Colombia como sede de la cumbre de biodiversidad más importante del mundo.
+                            </p>
+                            <a href="https://www.minambiente.gov.co/colombia-se-postula-para-ser-sede-de-la-cumbre-de-biodiversidad-mas-importante-del-mundo/" class="btn btn-primary" target="_blank">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/articulo2.jpg') }}" class="card-img-top" alt="Artículo 2" />
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                En Puerto Boyacá se utiliza IA para monitorear fauna y flora
+                            </h5>
+                            <p class="card-text">
+                                Artículo sobre el uso de inteligencia artificial para monitorear fauna y flora en Puerto Boyacá.
+                            </p>
+                            <a href="https://revistaclevel.com/en-puerto-boyaca-se-utiliza-ia-para-monitorear-fauna-y-flora" class="btn btn-primary" target="_blank">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/articulo3.jpg') }}" class="card-img-top" alt="Artículo 3" />
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Descubren nuevo yacimiento paleontológico de preservación excepcional en Toca, Boyacá
+                            </h5>
+                            <p class="card-text">
+                                Artículo sobre el descubrimiento de un nuevo yacimiento paleontológico en Toca, Boyacá.
+                            </p>
+                            <a href="https://www2.sgc.gov.co/Noticias/Paginas/Descubren-nuevo-yacimiento-paleontologico-de-preservacion-excepcional-en-Toca-Boyaca.aspx" class="btn btn-primary" target="_blank">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="especies" class="container my-5">
+            <h2>Especies propias de Cundinamarca y Boyacá</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/especie1.jpg') }}" class="card-img-top" alt="Cucarachero de Bogotá" />
+                        <div class="card-body">
+                            <h5 class="card-title">Cucarachero de Bogotá (Cistothorus apolinari)</h5>
+                            <p class="card-text">
+                                Este pequeño pájaro es nativo de los humedales de la Sabana de Bogotá.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/especie2.jpg') }}" class="card-img-top" alt="Búho de los Andes" />
+                        <div class="card-body">
+                            <h5 class="card-title">Búho de los Andes (Asio andinus)</h5>
+                            <p class="card-text">
+                                Esta especie de búho es endémica de los Andes colombianos y se encuentra en la región de Bogotá.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/especie3.jpg') }}" class="card-img-top" alt="Rana de cristal de Boyacá" />
+                        <div class="card-body">
+                            <h5 class="card-title">Rana de cristal de Boyacá (Centrolene buckleyi)</h5>
+                            <p class="card-text">
+                                Esta especie de rana se encuentra en las regiones montañosas de Boyacá y es conocida por su piel transparente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="mapa" class="container my-5">
+            <h2>Mapa de Regiones</h2>
+            <div id="map" style="height: 500px"></div>
+        </section>
+    </main>
+    <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center py-4">
+        <img class="footer-logo" src="{{ url_for('static', filename='images/favicon.png') }}" alt="Logo del Portafolio" />
+        <p class="footer-texto text-center">Protegiendo y conservando la biodiversidad en Cundinamarca y Boyacá.</p>
+        <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="derechos-de-autor">Creado por Biodiversidad Colombia (2024) &#169;</div>
+    </footer>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            initializeMap();
+        });
+
+        let mapInitialized = false;
+        let map;
+
+        function initializeMap() {
+            if (mapInitialized) {
+                map.invalidateSize();
+                return;
+            }
+
+            map = L.map("map").setView([5.0271, -73.5984], 7);
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var regions = [
+                {
+                    name: "Parque Natural Chicaque",
+                    coordinates: [4.6782, -74.3285],
+                    info: "Una reserva natural con gran biodiversidad, bosques de niebla y numerosas especies de flora y fauna.",
+                    image: "{{ url_for('static', filename='images/Chicaque.jpg') }}"
+                },
+                {
+                    name: "Reserva Natural El Encenillo",
+                    coordinates: [4.8508, -73.9904],
+                    info: "Un ecosistema de páramo con especies endémicas y en peligro de extinción, así como una rica biodiversidad de plantas.",
+                    image: "{{ url_for('static', filename='images/Encenillo.jpg') }}"
+                },
+                {
+                    name: "Parque Nacional Natural Sumapaz",
+                    coordinates: [4.2607, -74.1247],
+                    info: "El páramo más grande del mundo, hogar de numerosas especies de flora y fauna únicas.",
+                    image: "{{ url_for('static', filename='images/Sumapaz.jpg') }}"
+                },
+                {
+                    name: "Laguna de Guatavita",
+                    coordinates: [4.9234, -73.7519],
+                    info: "Un sitio sagrado indígena con una rica historia y un ecosistema lacustre diverso.",
+                    image: "{{ url_for('static', filename='images/Guatavita.jpg') }}"
+                },
+                {
+                    name: "Santuario de Fauna y Flora Iguaque",
+                    coordinates: [5.696, -73.4322],
+                    info: "Un santuario con una amplia variedad de flora y fauna, incluyendo ecosistemas de páramo y bosques andinos.",
+                    image: "{{ url_for('static', filename='images/Iguaque.jpg') }}"
+                },
+                {
+                    name: "Parque Nacional Natural El Cocuy",
+                    coordinates: [6.4062, -72.4162],
+                    info: "Una de las reservas naturales más importantes del país, con glaciares, páramos y una gran diversidad biológica.",
+                    image: "{{ url_for('static', filename='images/Cocuy.jpg') }}"
+                },
+                {
+                    name: "Laguna de Tota",
+                    coordinates: [5.5596, -72.888],
+                    info: "El lago más grande de Colombia, con un ecosistema acuático diverso y zonas circundantes de gran biodiversidad.",
+                    image: "{{ url_for('static', filename='images/Tota.jpg') }}"
+                },
+                {
+                    name: "Parque Natural Regional Serranía de las Quinchas",
+                    coordinates: [5.45, -74.34],
+                    info: "Una reserva natural con selvas húmedas tropicales y una gran variedad de especies de flora y fauna.",
+                    image: "{{ url_for('static', filename='images/Quinchas.jpg') }}"
+                }
+            ];
+
+            regions.forEach(function (region) {
+                var popupContent = "<b>" + region.name + "</b><br>" + region.info + "<br><img src='" + region.image + "' alt='" + region.name + "' style='width:100%;height:auto;'>";
+                var marker = L.marker(region.coordinates).addTo(map);
+                marker.bindPopup(popupContent);
+            });
+
+            mapInitialized = true;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
